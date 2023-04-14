@@ -1,0 +1,10 @@
+.Header__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
