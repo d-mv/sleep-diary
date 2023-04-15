@@ -6,3 +6,7 @@
   height: inherit;
   width: 95%;
 }
+
+.Today__timestamp_container {
+  padding: 1rem 0;
+}
