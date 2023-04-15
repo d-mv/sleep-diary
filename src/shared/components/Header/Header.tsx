@@ -3,14 +3,14 @@ import { ifTrue } from '@mv-d/toolbelt';
 
 import './Header.css';
 import { useStatus } from '../../hooks';
-import { SUCCESS } from '../../theme';
+import { PRIMARY, SUCCESS } from '../../theme';
 
 export function Header() {
   const { isAwake } = useStatus();
 
   return (
-    <header className={'Header__container'} style={{ backgroundColor: ifTrue(isAwake(), SUCCESS) }}>
-      <Typography variant='h3' color={ifTrue(isAwake(), '#fff')}>
+    <header className={'Header__container'} style={{ backgroundColor: ifTrue(isAwake(), SUCCESS, PRIMARY) }}>
+      <Typography variant='h2' color='#fff'>
         Sleep Diary
       </Typography>
     </header>

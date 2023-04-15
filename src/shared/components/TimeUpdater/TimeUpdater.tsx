@@ -5,13 +5,14 @@ import { CancelButton, SecondaryButton } from '../Buttons';
 import { TimeInput } from '../Inputs';
 import './TimeUpdater.css';
 import { TEXT } from '../../data';
+import dayjs, { Dayjs } from 'dayjs';
 
 const TXT = setupText(TEXT)('timeUpdater');
 
 interface Props {
   isOpen: boolean;
-  onChange: (value: MaybeNull<string>) => void;
-  value: string;
+  onChange: (value: MaybeNull<Dayjs>) => void;
+  value: Dayjs;
   onUpdate: () => void;
   buttonTitle: string;
   toggleIsOpen: () => void;

@@ -1,59 +1,65 @@
 import { useState } from 'react';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { setupText } from '@mv-d/toolbelt';
 
 import {
   MaybeNull,
-  PrimaryButton,
-  SecondaryButton,
-  TimeInput,
-  TimeUpdater,
   useUpdates,
   TEXT,
   Status,
-  Spacer,
+  useTimes,
+  DisplayTime,
+  DynamicDisplayTime,
+  formatAtTime,
+  UpdateTime,
+  PRIMARY,
+  PRIMARY_LESS,
 } from '../../../shared';
-import { ifTrue, setupText } from '@mv-d/toolbelt';
+
 import './Awake.css';
 
 const TXT = setupText(TEXT)('awake');
 
-export function Awake() {
+export default function Awake() {
   const { wentToBed } = useUpdates();
 
-  const [time, setTime] = useState<string>('');
+  const { elapsedTimeAwake, remainingTimeToSleep, intendedTimeToSleep } = useTimes();
 
-  const [timerUpdateIsOpen, setTimerUpdateIsOpen] = useState<boolean>(false);
+  const [time, setTime] = useState<MaybeNull<Dayjs>>(null);
 
-  function toggleTimerUpdate() {
-    if (!timerUpdateIsOpen) setTime(dayjs().toISOString());
-    else setTime('');
-
-    setTimerUpdateIsOpen(!timerUpdateIsOpen);
+  function handleTimeChange(t: MaybeNull<Dayjs>) {
+    if (!t) setTime(null);
+    else setTime(t);
   }
 
-  function handleWentToBed() {
-    wentToBed();
+  function handleUpdate() {
+    if (time) {
+      wentToBed(time);
+      setTime(null);
+    }
   }
 
-  function handleTimeChange(v: MaybeNull<string>) {
-    setTime(v || '');
+  function handleOnCurrentTime() {
+    wentToBed(dayjs());
+    setTime(null);
   }
 
   return (
     <div className='Awake__container'>
       <Status />
-      <p>elapsed time of awake</p>
-      <p>time to go to sleep</p>
-      <p>time till sleep</p>
-      <PrimaryButton title={TXT('wentToBed')} onClick={handleWentToBed} />
-      <Spacer vertical two />
-      <TimeUpdater
-        isOpen={timerUpdateIsOpen}
-        buttonTitle='Update sleep time'
+      <DynamicDisplayTime getTime={elapsedTimeAwake} label='Elapsed time' />
+      <DynamicDisplayTime getTime={remainingTimeToSleep} label='Remaining time till sleep' />
+      <DisplayTime time={formatAtTime(intendedTimeToSleep)} label='Intended time to sleep' />
+      <UpdateTime
+        title={TXT('wentToBed')}
+        updateTitle={TXT('enterManually')}
+        updateTitleOpen={TXT('updateSleep')}
         value={time}
         onChange={handleTimeChange}
-        onUpdate={handleWentToBed}
-        toggleIsOpen={toggleTimerUpdate}
+        onUpdate={handleUpdate}
+        onCurrentTime={handleOnCurrentTime}
+        onCancel={() => setTime(null)}
+        roundButtonColors={[PRIMARY, PRIMARY_LESS]}
       />
     </div>
   );

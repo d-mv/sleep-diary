@@ -11,6 +11,12 @@ import { blueGrey, grey, lightBlue, lightGreen } from '@mui/material/colors';
 // };
 export const SUCCESS = lightGreen[600];
 
+export const SUCCESS_LESS = lightGreen[400];
+
+export const PRIMARY = lightBlue[800];
+
+export const PRIMARY_LESS = lightBlue[600];
+
 export const theme = createTheme({
   palette: {
     text: {
@@ -27,7 +33,7 @@ export const theme = createTheme({
     primary: {
       light: lightBlue[600],
       main: lightBlue[700],
-      dark: lightBlue[800],
+      dark: PRIMARY,
       contrastText: grey[50],
     },
     background: { default: grey[50], paper: grey[100] },

@@ -1,3 +1,3 @@
 export * from './lazy.tools';
 
-export * from './date.tools';
+export * from './dateTime.tools';

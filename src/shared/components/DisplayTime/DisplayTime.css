@@ -1,0 +1,7 @@
+.DisplayTime__container {
+	padding: 1rem 0;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+}
