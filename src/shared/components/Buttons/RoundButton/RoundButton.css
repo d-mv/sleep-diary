@@ -29,6 +29,7 @@
   position: inherit;
   display: grid;
   place-items: center;
+  padding: 1rem;
 
   > p {
     font-weight: 600;

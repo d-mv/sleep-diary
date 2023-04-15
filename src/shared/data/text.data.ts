@@ -1,10 +1,10 @@
 export const TEXT = {
-  awake: { wentToBed: 'ASLEEP', enterManually: 'Enter time manually', updateSleep: 'Update' },
+  awake: { wentToBed: 'GO TO BED', enterManually: 'Enter time manually', updateSleep: 'Update' },
   timeUpdater: {
     enterManually: 'Enter time manually',
   },
   asleep: {
-    wokeUp: 'AWAKE',
+    wokeUp: 'WAKE UP',
     elapsedTime: 'Elapsed time',
     updateWakeUp: 'Update',
     enterManually: 'Enter time manually',
